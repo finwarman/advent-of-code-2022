@@ -7,11 +7,10 @@ year="2022"
 session_file=".aoc_session"
 export AOC_SESSION=$(cat "$session_file")
 
-echo "======== Avent of Code Setup ========="
+echo "======== Advent of Code Setup ========="
 echo ""
 
 read YYYY MM DD <<<$(date +'%Y %m %d')
-# DD="01"
 echo "Today is Day $DD of Advent of Code!"
 echo ""
 
