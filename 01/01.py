@@ -1,8 +1,9 @@
 #! /usr/bin/env python3
 
 # ==== INPUT ====
-data = ""
-with open('input.txt', 'r') as file:
+
+INPUT = 'input.txt'
+with open(INPUT, 'r', encoding='UTF-8') as file:
     data = file.read()
 
 rows = [row.strip() for row in data.split('\n')[:-1]]
