@@ -25,8 +25,8 @@ else
 fi
 echo ""
 
-echo "Fetching todays input to ./$DD/$DD.txt..."
-aocd > "./$DD/$DD.txt"
+echo "Fetching todays input to ./$DD/input.txt..."
+aocd > "./$DD/input.txt"
 echo "Done!"
 echo ""
 
@@ -77,7 +77,7 @@ echo "(Set executable permissions)"
 echo ""
 
 echo "Opening in VS Code..."
-code "./$DD/$DD.txt"
+code "./$DD/input.txt"
 code "./$DD/02.py"
 code "./$DD/01.py"
 echo ""
