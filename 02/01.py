@@ -10,16 +10,6 @@ rows = [row.strip() for row in data.split('\n')[:-1]]
 
 # ==== SOLUTION ====
 
-total = 0
-
-# 1 rock
-# 2 paper
-# 3 scissors
-
-# 0 loss
-# 3 draw
-# 6 won
-
 shapes = {
     'X': 1,
     'Y': 2,
@@ -50,3 +40,5 @@ for row in rows:
     if beats[counter_move] == move:
         score += 6
 print(score)
+
+# output: 11449
