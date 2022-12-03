@@ -16,12 +16,11 @@ total = 0
 
 for i in range(0, len(rows), 3):
     elf1, elf2, elf3 = set(rows[i]), set(rows[i+1]), set(rows[i+2])
-
     common = elf1.intersection(elf2.intersection(elf3)).pop()
     if common.islower():
-        total += string.ascii_lowercase.index(common) + 1
+        total += 1 + string.ascii_lowercase.index(common)
     else:
-        total += 26 + string.ascii_uppercase.index(common) + 1
+        total += 27 + string.ascii_uppercase.index(common)
 
 print(total)
 
