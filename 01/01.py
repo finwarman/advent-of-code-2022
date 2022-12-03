@@ -20,3 +20,6 @@ for row in rows:
         current = 0
 
 print(most)
+
+# output: 71124
+assert most == 71124

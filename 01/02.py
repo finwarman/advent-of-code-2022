@@ -20,4 +20,8 @@ for row in rows:
         totals.append(current)
         current = 0
 
-print(sum(sorted(totals, reverse=True)[:3]))
+result = sum(sorted(totals, reverse=True)[:3])
+print(result)
+
+# output: 204639
+assert result == 204639

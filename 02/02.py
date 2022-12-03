@@ -35,3 +35,4 @@ for row in rows:
 print(score)
 
 # output: 13187
+assert score == 13187

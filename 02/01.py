@@ -42,3 +42,4 @@ for row in rows:
 print(score)
 
 # output: 11449
+assert score == 11449
