@@ -1,6 +1,4 @@
 #! /usr/bin/env python3
-import re
-import math
 
 # ==== INPUT ====
 
@@ -15,32 +13,29 @@ rows = [row.strip() for row in data.split('\n')[:-1]]
 class Dir:
     def __init__(self, name):
         self.name = name
-        self.children = {}
         self.parent = None
+        self.children = {}
         self.files = {}
         self.size = 0
 
-    def PrintTree(self, indent='', total=0):
-        print(indent + self.name)
-        print(indent + f'{self.size}')
+    def get_answer(self, total=0):
         if self.size <= 100000:
             total += self.size
         for dirname in sorted(self.children.keys()):
             child = self.children[dirname]
-            total = child.PrintTree(indent + '  ', total)
+            total = child.get_answer(total)
         return total
 
-    def CalculateSizes(self):
+    def calculate_sizes(self):
         self.size = sum(self.files.values())
         for dirname in sorted(self.children.keys()):
             child = self.children[dirname]
-            child.CalculateSizes()
+            child.calculate_sizes()
         if self.parent:
             self.parent.size += self.size
 
 
 root = Dir('/')
-current, prev = root, None
 
 i = 0
 while i < len(rows):
@@ -62,7 +57,6 @@ while i < len(rows):
             if data == 'dir':
                 if not name in current.children:
                     current.children[name] = Dir(name)
-                dir = current.children[name]
             else:
                 filesize = int(data)
                 if not name in current.children:
@@ -70,8 +64,8 @@ while i < len(rows):
     i += 1
 
 
-root.CalculateSizes()
-total = root.PrintTree()
+root.calculate_sizes()
+total = root.get_answer()
 
 print(total)
 
