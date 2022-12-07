@@ -18,13 +18,13 @@ class Dir:
         self.files = {}
         self.size = 0
 
-    def get_answer(self, required, results=[]):
-        if self.size >= required:
-            results.append(self.size)
+    def get_answer(self, required, result=None):
+        if self.size >= required and (result is None or self.size < result):
+            result = self.size
         for dirname in sorted(self.children.keys()):
             child = self.children[dirname]
-            results = child.get_answer(required, results)
-        return results
+            result = child.get_answer(required, result)
+        return result
 
     def calculate_sizes(self):
         self.size = sum(self.files.values())
@@ -68,8 +68,7 @@ root.calculate_sizes()
 unused = 70000000 - root.size
 req = 30000000 - unused
 
-totals = root.get_answer(req)
-result = min(totals)
+result = root.get_answer(req)
 
 print(result)
 
