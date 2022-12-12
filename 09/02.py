@@ -38,7 +38,8 @@ def follow_head(knot, head):
     if ky == hy and abs(kx-hx)==2:
         return kx + int(copysign(1, hx-kx)), ky
     # diagonal
-    return kx + int(copysign(1, hx-kx)), ky + int(copysign(1, hy-ky))
+    return (kx + int(copysign(1, hx-kx)),
+            ky + int(copysign(1, hy-ky)))
 
 for direction, steps in rows:
     steps = int(steps)
