@@ -29,8 +29,6 @@ for y, row in enumerate(grid):
 # convert to numeric
 grid = [[ord(char)-96 for char in row] for row in grid]
 
-
-
 def candidates(pos, grid, visited):
     x,y = pos
     cands = []
