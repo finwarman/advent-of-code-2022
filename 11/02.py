@@ -4,9 +4,6 @@ from collections import deque
 import re
 import numpy as np
 
-# import sys
-# sys.set_int_max_str_digits(0)
-
 # ==== INPUT ====
 
 INPUT = 'input.txt'
@@ -45,7 +42,7 @@ for rows in monkey_data:
 activity = [0 for _ in range(len(monkeys))]
 
 # get a common factor of all the divisor checks
-normalise = int(np.product([m.divisor for m in monkeys]))
+normalise = np.lcm.reduce([m.divisor for m in monkeys])
 
 for r in range(10000):
     for i, monkey in enumerate(monkeys):
@@ -77,3 +74,5 @@ print(result)
 
 # output: 14081365540
 assert result == 14081365540
+
+print(normalise)
