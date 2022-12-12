@@ -40,10 +40,6 @@ def follow_head(knot, head):
     # diagonal
     return kx + int(copysign(1, hx-kx)), ky + int(copysign(1, hy-ky))
 
-# just for drawing grid
-minx, miny = 0, 0
-maxx, maxy = 0, 0
-
 for direction, steps in rows:
     steps = int(steps)
     head_dx, head_dy = dir_steps[direction]
@@ -56,38 +52,7 @@ for direction, steps in rows:
             knots[j] = follow_head(knot, (prev_x, prev_y))
             prev_x, prev_y = knots[j]
 
-            # just for drawing grid
-            minx = min(prev_x, minx)
-            miny = min(prev_y, miny)
-            maxx = max(prev_x, maxx)
-            maxy = max(prev_y, maxy)
-
         tail_positions.add(knots[-1])
-
-
-# === grid drawing ===
-grid = [['.' for _ in range((-minx)+maxx+2)] for _ in range((-miny)+maxy+2)]
-
-# knots
-for i, (x, y) in enumerate(knots):
-    grid[-1*(y+(-1*miny)+1)][x+(-1*minx)+1] = str(i+1)
-
-# tail history
-for x, y in tail_positions:
-    grid[-1*(y+(-1*miny)+1)][x+(-1*minx)+1] = '#'
-
-# head
-grid[-1*(head[1]+(-1*miny)+1)][head[0]+(-1*minx)+1] = 'H'
-
-# start
-grid[-1*((-1*miny)+1)][(-1*minx)+1] = 's'
-
-for row in grid:
-    for char in row:
-        print(char, end='')
-    print()
-
-# ====================
 
 result = len(tail_positions)
 print(result)
