@@ -53,7 +53,7 @@ def path(parents, end):
 result = W * H
 
 for i, start in enumerate(starts):
-    if (i+1) % 10 == 0:
+    if (i+1) % 200 == 0:
         print(f"{i+1:4}/{len(starts)}")
 
     parents = {start: None}
@@ -65,11 +65,11 @@ for i, start in enumerate(starts):
         visited.add(u)
         for v in candidates(u, grid, visited.union(c)):
             parents[v] = u
+            c.append(v)
             if v == end:
                 result = min(len(path(parents, v)) - 1, result)
                 c.clear()
                 break
-            c.append(v)
 
 print()
 print(result)
