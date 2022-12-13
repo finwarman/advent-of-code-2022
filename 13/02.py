@@ -13,44 +13,29 @@ rows = [row.strip() for row in data.split('\n')[:-1] if row]
 
 # ==== SOLUTION ====
 
-rows = [ast.literal_eval(row) for row in rows]
-rows.append([[2]])
-rows.append([[6]])
+SEP1, SEP2 = [[2]], [[6]]
+rows = [ast.literal_eval(row) for row in rows] + [SEP1, SEP2]
 
 def compare(lhs, rhs):
     if isinstance(lhs, list) and isinstance(rhs, int):
-        rhs = [rhs]
-        return compare(lhs, rhs)
-    elif isinstance(lhs, int) and isinstance(rhs, list):
-        lhs = [lhs]
-        return compare(lhs, rhs)
-    for i in range(max(len(lhs), len(rhs))):
-        if i >= len(lhs):
-            return True
-        elif i >= len(rhs):
-            return False
+        return compare(lhs, [rhs])
+    if isinstance(lhs, int) and isinstance(rhs, list):
+        return compare([lhs], rhs)
+
+    for i in range(min(len(lhs), len(rhs))):
         l, r = lhs[i], rhs[i]
-        if isinstance(l, int) and isinstance(r, int):
-            if l < r:
-                return True
-            if l > r:
-                return False
-        else:
-            c = compare(l, r)
-            if c is not None:
-                return c
-    return None
+        if isinstance(l, list) or isinstance(r, list):
+            return compare(l, r)
+        elif l != r:
+            return l < r
+
+    return len(lhs) < len(rhs)
 
 def cmp(lhs, rhs):
-    c = compare(lhs, rhs)
-    if c is True:
-        return 1
-    elif c is False:
-        return -1
-    return 0
+    return (1 if compare(lhs, rhs) else -1)
 
 rows = sorted(rows, key=functools.cmp_to_key(cmp), reverse=True)
-result = (rows.index([[2]]) + 1) * (rows.index([[6]]) + 1)
+result = (rows.index(SEP1)+1) * (rows.index(SEP2)+1)
 
 print(result)
 
