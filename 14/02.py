@@ -15,8 +15,8 @@ XVALS = [int(x.group(1)) for x in re.finditer(r'\b(\d+),', data)]
 
 # ==== SOLUTION ====
 
-H = max(YVALS) + 2
 FLOOR_Y = max(YVALS) + 2
+H = FLOOR_Y
 
 MIN = 0
 MAX = max(XVALS) + H
