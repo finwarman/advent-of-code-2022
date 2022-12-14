@@ -20,12 +20,12 @@ FLOOR_Y = max(YVALS) + 2
 
 MIN = 0
 MAX = max(XVALS) + H
-W = MAX - MIN
+W = abs(MAX - MIN)
 
-grid = [['.' for _ in range(W)] for _ in range(H+1)]
+grid = [[False for _ in range(W)] for _ in range(H+1)]
 
 for x in range(W):
-    grid[FLOOR_Y][x] = '#'
+    grid[FLOOR_Y][x] = True
 
 for row in rows:
     points = row.split(' -> ')
@@ -38,13 +38,10 @@ for row in rows:
         ity = 1 if ny >= y else -1
         for ly in range(y, ny+ity, ity):
             for lx in range(x, nx+itx, itx):
-                grid[ly][lx] = '#'
+                grid[ly][lx] = True
 
 SOURCE_X = 500-MIN
-grid[0][SOURCE_X] = '+'
-
 sand_count = 0
-
 finished = False
 while not finished:
     moving = True
@@ -52,14 +49,14 @@ while not finished:
     sand_x = SOURCE_X
     while moving and sand_y < H:
         moving = False
-        if grid[sand_y+1][sand_x] == '.':
+        if not grid[sand_y+1][sand_x]:
             sand_y += 1
             moving = True
-        elif grid[sand_y+1][sand_x-1] == '.':
+        elif not grid[sand_y+1][sand_x-1]:
             sand_y += 1
             sand_x -= 1
             moving = True
-        elif grid[sand_y+1][sand_x+1] == '.':
+        elif not grid[sand_y+1][sand_x+1]:
             sand_y += 1
             sand_x += 1
             moving = True
@@ -68,7 +65,7 @@ while not finished:
     if sand_y >= H:
         quit(f"voided: error @ x,y ({sand_x}, {sand_y})")
     else:
-        grid[sand_y][sand_x] = 'O'
+        grid[sand_y][sand_x] = True
         sand_count += 1
 
 print(sand_count)
