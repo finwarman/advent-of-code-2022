@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
+
 import re
-import math
 
 # ==== INPUT ====
 
@@ -39,9 +39,6 @@ for row in rows:
 SOURCE_X = 500-MIN
 grid[0][SOURCE_X] = '+'
 
-# for i, row in enumerate(grid):
-#     print(f"{i:3} " + ''.join(row))
-
 sand_count = 0
 
 voided = False
@@ -67,10 +64,6 @@ while not voided:
     else:
         grid[sand_y][sand_x] = 'O'
         sand_count += 1
-
-# print()
-# for i, row in enumerate(grid):
-#     print(f"{i:3} " + ''.join(row))
 
 print()
 print(sand_count)
