@@ -30,7 +30,7 @@ for cube in c:
         new = (x+dx, y+dy, z+dz)
         if new != cube and new in cubes:
             exposed -= 1
-
+            
     faces += exposed
 
 print(faces)
